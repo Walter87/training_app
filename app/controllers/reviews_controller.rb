@@ -3,11 +3,14 @@ class ReviewsController < ApplicationController
   expose(:review)
   expose(:product)
 
+
+
   def edit
   end
 
   def create
     self.review = Review.new(review_params)
+    self.review.user_id = current_user.id
 
     if review.save
       product.reviews << review
@@ -27,3 +30,4 @@ class ReviewsController < ApplicationController
       params.require(:review).permit(:content, :rating)
     end
 end
+ 
