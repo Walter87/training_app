@@ -4,12 +4,14 @@ class ProductsController < ApplicationController
   
   
   expose(:category)
+  expose(:categories)
   expose(:products)
   expose(:product)
   expose(:review) { Review.new }
   expose_decorated(:reviews, ancestor: :product)
 
   def index
+   # @categories = Category.all
   end
 
   def show
@@ -24,6 +26,7 @@ class ProductsController < ApplicationController
 
   def create
     self.product = Product.new(product_params)
+    self.product.user_id = current_user.id
 
     if product.save
       category.products << product
@@ -59,8 +62,8 @@ class ProductsController < ApplicationController
   end
 
   def correct_user
-    if current_user != self.product.user_id  
-      flash[:error] = 'You are not allowed to edit this product.'
+    if current_user != self.product.user  and !current_user.admin?
+      flash[:error] = 'You are not allowed to edit this product.' 
       redirect_to(category_product_url(category, product))
       
     end

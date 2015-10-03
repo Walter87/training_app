@@ -1,4 +1,6 @@
-@import "bootstrap";
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
 .spacer5 { height: 5px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
 .spacer10 { height: 10px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
 .spacer15 { height: 15px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
@@ -11,44 +13,3 @@
 .spacer50 { height: 50px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
 .spacer100 { height: 100px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
 .spacer200 { height: 200px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
-
-
-/* Reviews */
-
-
-.poor { color: #E62E00;}
-.mediocre { color: #E68A00; }
-.satisfactory { color: #FFCC00; }
-.good { color: #19A319; }
-.very-good { color: #2727B2; }  
-
-/* Gravatar */
-
-.gravatar {
-  float: left;
-  margin-right: 10px;
-  }
-
-/* body */
-
-body {
-	padding-top: 70px;
-}  
-
-/* progress-bar */
-
-.progress-bar-poor {
-      background-color: #E62E00;
-}
-.progress-bar-mediocre {
-      background-color: #E68A00;
-}
-.progress-bar-satisfactory {
-      background-color: #FFCC00;
-}
-.progress-bar-good {
-      background-color: #19A319;
-}
-.progress-bar-very-good {
-      background-color: #2727B2;
-}

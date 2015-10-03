@@ -1,0 +1,17 @@
+.container
+  %h1= gravatar_for user
+  %h1=  user.firstname + ' ' + user.lastname
+  %h2= user.email
+  %h4= "Member Since: " + user.created_at.to_s
+  %br/
+  -val = user.reviews.count <= 5 ? user.reviews.count : 5
+  %h4= "Last " + user.firstname + "'s " + pluralize(val, "review")
+
+  - user.reviews.last_five.each do |review|
+    = "Content: " + review.content
+    %br/
+    = "Rating: " + review.rating.to_s
+    %br/	
+    = "Created at: " + review.created_at.to_s
+    %br/
+    %hr/

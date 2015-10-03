@@ -1,17 +1,51 @@
-%p#notice= notice
+.container
+ 
 
-%p
-  %b Name:
-  = category.name
+  %p
+    %h3.page-header.jumbotron
+      %b Category name: 
+      .label.label-default
+        #{category.name}
+      -if user_signed_in?  
+        = link_to 'Edit', edit_category_path(category), class: "btn btn-warning pull-right" if current_user.admin?
 
-%p
-  - category.products.each do |product|
-    = product.title
+  
+    - if !category.products.any?
+      .panel.panel-info
+        .panel-heading 
+          Info
+        .panel-body 
+          No products in this category yet.
+    - else    
+      %h4
+        %b All category's products:
+  %p
+    - category.products.each do |product|
+      .row
+        .col-md-3
+          .well.well-sm
+            .text-center=product.title
+        .col-md-6.text-right  
 
-%p
-  %h3 New product
-  = render 'products/form'
+          Created by: 
+          =product.user.email
+        .col-md-3
+          .btn-group.btn-group-sm
+            =link_to "Show", category_product_path(category, product), class: "btn btn-primary"
+            - if user_signed_in?
+              - if current_user == product.user or current_user.admin?
+                =link_to 'Edit', edit_category_product_path(product, category_id: product.category_id)  ,        class: "btn btn-warning" 
+                = link_to 'Destroy', category_product_path(product, category_id: product.category_id),           method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger  "
+                   
 
-= link_to 'Edit', edit_category_path(category) if current_user.admin?
-\|
-= link_to 'Back', categories_path, class: 'btn btn-primary'
+      
+
+      %br
+  - if user_signed_in?
+    %p
+      %h3 New product
+      = render 'products/form'
+      .spacer50
+
+     
+  = link_to 'Back', categories_path, class: 'btn btn-primary'

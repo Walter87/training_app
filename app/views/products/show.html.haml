@@ -1,25 +1,54 @@
-%p#notice= notice
-%p#error= flash[:error]
+.container
+ 
+  %h3.page-header.jumbotron
+    %b Product:
+    .label.label-default  #{product.title}
+    - if user_signed_in?
+      = link_to 'Edit', edit_category_product_path(category.id, product.id), class: "btn btn-warning pull-right" if current_user == product.user or current_user.admin? 
+  
+  .pull-right
+    %b Category:
+    = product.category.name 
+  .spacer30 
+ 
+  .panel.panel-default
+    .panel-heading  
+      %b Description:
+    .panel-body
+      %p
+        = product.description
+    .panel-footer 
+      %p.pull-right
+        %b Price:
+        = product.price
 
-%p
-  %b Title:
-  = product.title
-%p
-  %b Description:
-  = product.description
-%p
-  %b Price:
-  = product.price
+        .spacer10
+  %b Average rate: #{product.average_rating.round(1)}
 
-%p
-  %b Category
-  = product.category.name
+  .spacer10    
 
-%h3 Reviews
-= render 'reviews/form'
+  .row.col-md-8
+    .progress.text-center
+      .progress-bar.progress-bar-poor{ style: "width: #{product.color_values[0]}%" }
+      .progress-bar.progress-bar-mediocre{ style: "width: #{product.color_values[1]}%" }  
+      .progress-bar.progress-bar-satisfactory{ style: "width: #{product.color_values[2]}%" }
+      .progress-bar.progress-bar-good{ style: "width: #{product.color_values[3]}%" } 
+      .progress-bar.progress-bar-very-good{ style: "width: #{product.color_values[4]}%" }  
+     
+         
+  %br.spacer30
+  %hr  
+  %h3 Add Review
+  - if user_signed_in?
+    = render 'reviews/form'
+  %h3.panel.panel-primary.panel-heading.row-md-12{type: "button", role: "button", "data-toggle" => "collapse", href: "#collapseExample", "aria-expanded" => "false", "aria-controls" => "collapseExample"} 
+    Click here to see reviews of the current product  
+  .collapse{ id: "collapseExample", class: "well"} 
+    = render reviews
+  .spacer50
+  
 
-= render reviews
+  = link_to 'Back', category_products_path, class: 'btn btn-primary'
+  .spacer30
 
-= link_to 'Edit', edit_category_product_path(category.id, product.id) if current_user == review.user or current_user.admin? 
-\|
-= link_to 'Back', category_products_path, class: 'btn btn-primary'
+    

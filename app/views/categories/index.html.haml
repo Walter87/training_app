@@ -1,19 +1,25 @@
-%h1 Listing categories
+.container
+  %h1.page-header.jumbotron Listing categories
 
-%table.table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
-
-  - categories.each do |category|
+  %table.table
     %tr
-      %td= category.name
-      %td= link_to 'Show', category
-      %td= link_to 'Edit', edit_category_path(category)
-      %td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }
+      %th.col-md-9 
+        %h4 
+          %b Name
+      %th.col-md-3
+      
 
-%br
+    - categories.each do |category|
+      %tr
+        %td
+          %strong= category.name
+        %td.btn-group.btn-group-sm
+          = link_to 'Show', category, class: "btn btn-primary"
+          - if user_signed_in? and current_user.admin? 
+            = link_to 'Edit', edit_category_path(category), class: "btn btn-warning"
+            = link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
 
-= link_to 'New Category', new_category_path
+  %br
+  .spacer100
+    -if user_signed_in?
+      = link_to 'New Category', new_category_path, class: "btn btn-default" if current_user.admin?

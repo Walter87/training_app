@@ -1,4 +1,15 @@
-%p= review.content
-%p
-  %b= review.rating
-  %em= review.author
+.panel-default{ class: "#{review.color}"}
+  .row
+    %div{class: "col-md-8"}
+      .panel.panel-default
+        .panel-heading
+          = gravatar_for review.user, size: 25
+          = review.author	
+        .panel-body
+          = review.content
+        .panel-footer
+          %b.pull-left 
+            Rate: #{review.rating}
+         
+          .spacer10
+  

@@ -1,8 +1,5 @@
-class ProductDecorator < Draper::Decorator
+class UserDecorator < Draper::Decorator
   delegate_all
-  def color
-    product.price
-  end
 
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
@@ -12,7 +9,5 @@ class ProductDecorator < Draper::Decorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
-
-  # Count progress for progress_bar dependant of value  
 
 end
