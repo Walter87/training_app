@@ -2,14 +2,14 @@
   .row
     %div{class: "col-md-8"}
       .panel.panel-default
-        .panel-heading
-          = gravatar_for review.user, size: 25
-          = review.author	
         .panel-body
           = review.content
         .panel-footer
-          %b.pull-left 
+          %b.pull-left
             Rate: #{review.rating}
-         
+          .pull-right
+            Created at:  #{review.created_at}
+
+
           .spacer10
-  
+

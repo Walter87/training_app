@@ -8,10 +8,7 @@
   %h4= "Last " + user.firstname + "'s " + pluralize(val, "review")
 
   - user.reviews.last_five.each do |review|
-    = "Content: " + review.content
-    %br/
-    = "Rating: " + review.rating.to_s
-    %br/	
+    = render "reviews/review", review: review
     = "Created at: " + review.created_at.to_s
     %br/
     %hr/

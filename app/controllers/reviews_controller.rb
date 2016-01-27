@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
 
   expose(:review)
+  expose(:reviews)
   expose(:product)
 
 
@@ -30,4 +31,4 @@ class ReviewsController < ApplicationController
       params.require(:review).permit(:content, :rating)
     end
 end
- 
+

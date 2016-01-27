@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :create]
   before_action :correct_user, only: [:edit, :update]
-  
-  
+
+
   expose(:category)
   expose(:categories)
   expose(:products)
@@ -15,13 +15,14 @@ class ProductsController < ApplicationController
   end
 
   def show
+
   end
 
   def new
   end
 
   def edit
-    
+
   end
 
   def create
@@ -63,11 +64,11 @@ class ProductsController < ApplicationController
 
   def correct_user
     if current_user != self.product.user  and !current_user.admin?
-      flash[:error] = 'You are not allowed to edit this product.' 
+      flash[:error] = 'You are not allowed to edit this product.'
       redirect_to(category_product_url(category, product))
-      
+
     end
-    
-  end  
+
+  end
 
 end

@@ -1,23 +1,23 @@
 .container
- 
+
   %h3.page-header.jumbotron
     %b Product:
     .label.label-default  #{product.title}
     - if user_signed_in?
-      = link_to 'Edit', edit_category_product_path(category.id, product.id), class: "btn btn-warning pull-right" if current_user == product.user or current_user.admin? 
-  
+      = link_to 'Edit', edit_category_product_path(category.id, product.id), class: "btn btn-warning pull-right" if current_user == product.user or current_user.admin?
+
   .pull-right
     %b Category:
-    = product.category.name 
-  .spacer30 
- 
+    = product.category.name
+  .spacer30
+
   .panel.panel-default
-    .panel-heading  
+    .panel-heading
       %b Description:
     .panel-body
       %p
         = product.description
-    .panel-footer 
+    .panel-footer
       %p.pull-right
         %b Price:
         = product.price
@@ -25,30 +25,31 @@
         .spacer10
   %b Average rate: #{product.average_rating.round(1)}
 
-  .spacer10    
+  .spacer10
 
   .row.col-md-8
     .progress.text-center
       .progress-bar.progress-bar-poor{ style: "width: #{product.color_values[0]}%" }
-      .progress-bar.progress-bar-mediocre{ style: "width: #{product.color_values[1]}%" }  
+      .progress-bar.progress-bar-mediocre{ style: "width: #{product.color_values[1]}%" }
       .progress-bar.progress-bar-satisfactory{ style: "width: #{product.color_values[2]}%" }
-      .progress-bar.progress-bar-good{ style: "width: #{product.color_values[3]}%" } 
-      .progress-bar.progress-bar-very-good{ style: "width: #{product.color_values[4]}%" }  
-     
-         
+      .progress-bar.progress-bar-good{ style: "width: #{product.color_values[3]}%" }
+      .progress-bar.progress-bar-very-good{ style: "width: #{product.color_values[4]}%" }
+
+
   %br.spacer30
-  %hr  
+  %hr
   %h3 Add Review
   - if user_signed_in?
     = render 'reviews/form'
-  %h3.panel.panel-primary.panel-heading.row-md-12{type: "button", role: "button", "data-toggle" => "collapse", href: "#collapseExample", "aria-expanded" => "false", "aria-controls" => "collapseExample"} 
-    Click here to see reviews of the current product  
-  .collapse{ id: "collapseExample", class: "well"} 
-    = render reviews
+  %h3.panel.panel-primary.panel-heading.row-md-12{type: "button", role: "button", "data-toggle" => "collapse", href: "#collapseExample", "aria-expanded" => "false", "aria-controls" => "collapseExample"}
+    Click here to see reviews of the current product
+  .collapse{ id: "collapseExample"}
+    - product.reviews.each do |review|
+      = render '/reviews/review', review: review
   .spacer50
-  
+
 
   = link_to 'Back', category_products_path, class: 'btn btn-primary'
   .spacer30
 
-    
+

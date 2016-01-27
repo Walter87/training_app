@@ -1,22 +1,22 @@
 .container
- 
+
 
   %p
     %h3.page-header.jumbotron
-      %b Category name: 
+      %b Category name:
       .label.label-default
         #{category.name}
-      -if user_signed_in?  
+      -if user_signed_in?
         = link_to 'Edit', edit_category_path(category), class: "btn btn-warning pull-right" if current_user.admin?
 
-  
+
     - if !category.products.any?
       .panel.panel-info
-        .panel-heading 
+        .panel-heading
           Info
-        .panel-body 
+        .panel-body
           No products in this category yet.
-    - else    
+    - else
       %h4
         %b All category's products:
   %p
@@ -25,20 +25,20 @@
         .col-md-3
           .well.well-sm
             .text-center=product.title
-        .col-md-6.text-right  
+        .col-md-6.text-right
 
-          Created by: 
-          =product.user.email
+          Created by:
+          =product.user.email if product.user
         .col-md-3
           .btn-group.btn-group-sm
             =link_to "Show", category_product_path(category, product), class: "btn btn-primary"
             - if user_signed_in?
               - if current_user == product.user or current_user.admin?
-                =link_to 'Edit', edit_category_product_path(product, category_id: product.category_id)  ,        class: "btn btn-warning" 
+                =link_to 'Edit', edit_category_product_path(product, category_id: product.category_id)  ,        class: "btn btn-warning"
                 = link_to 'Destroy', category_product_path(product, category_id: product.category_id),           method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger  "
-                   
 
-      
+
+
 
       %br
   - if user_signed_in?
@@ -47,5 +47,5 @@
       = render 'products/form'
       .spacer50
 
-     
+
   = link_to 'Back', categories_path, class: 'btn btn-primary'
